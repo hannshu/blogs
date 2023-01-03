@@ -6,8 +6,8 @@ author:
 site_name: blog.hanshu.org
 permalink: /:categories/:path/
 
-icon_link: https://cdn.jsdelivr.net/gh/R1szW7xqoVdA/Vu-jewdLEw--f-_-/icon/icon-blog.ico
-svg_link: https://cdn.jsdelivr.net/gh/R1szW7xqoVdA/Vu-jewdLEw--f-_-/icon/icon.svg
+icon_link: https://cdn.jsdelivr.net/gh/hannshu/imgs/icon/icon-blog.ico
+svg_link: https://cdn.jsdelivr.net/gh/hannshu/imgs/icon/icon.svg
 
 show_excerpts: false 
 
