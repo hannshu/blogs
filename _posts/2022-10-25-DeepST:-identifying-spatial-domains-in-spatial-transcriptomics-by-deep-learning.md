@@ -4,7 +4,7 @@ categories: 空间转录组
 
 ## DeepST流程图
 
-![DeepST流程图](https://cdn.jsdelivr.net/gh/hannshu/imgsimg/202210241628242.png)
+![DeepST流程图](https://cdn.jsdelivr.net/gh/hannshu/imgs/img/202210241628242.png)
 
 ## 数据预处理
 
