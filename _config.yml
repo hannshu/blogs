@@ -7,7 +7,7 @@ site_name: blog.hanshu.org
 permalink: /:categories/:path/
 
 icon_link: https://cdn.jsdelivr.net/gh/hannshu/imgs/icon/icon-blog.ico
-svg_link: https://cdn.jsdelivr.net/gh/hannshu/imgs/icon/icon.svg
+svg_link: https://cdn.jsdelivr.net/gh/hannshu/imgs/icon/icon-blog.svg
 
 show_excerpts: false 
 
