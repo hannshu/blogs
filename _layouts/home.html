@@ -2,17 +2,54 @@
 layout: default
 ---
 
-<div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
+<style type="text/css">
+  .search_area {
+    text-align: center;
+    border-radius: 5%;
+    border-color: black;
+    border-width: 5%;
+  }
+  .table {
+    width: 45%;
+    text-align: center;
+    list-style: none; 
+    background-color: #e1e1e1;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+  }
+</style>
 
+<div class="home">  
   {% assign list = site.posts | group_by:"categories" %}
   {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
 
+  <!-- generate page title list -->
+  {% capture titles %}
+    {% for li in site.posts %}
+      {{ li.title | append: '\' }}
+    {% endfor %}
+  {% endcapture %}
+  <div id="titles" style="display: none;">{{titles}}</div>
+
+  {% capture urls %}
+    {% for li in site.posts %}
+      {{ li.url | relative_url | append: '\' }}
+    {% endfor %}
+  {% endcapture %}
+  <div id="urls" style="display: none;">{{urls}}</div>
+
+  <div class="search_area">
+    search by key words: <input type="text" id="search_input" oninput="on_input(event, this)" onclick="activate_input(event, this)" placeholder="search...">
+    <ul class="table">
+      <div id="search_result" style="position: relative;"></div>
+    </ul>
+  </div><br>
+
+  <!-- show posts name  -->
   <ul>
     {% for items in list %}
-      <li><a href="#" onclick="trig(this)">{{items.name}}</a>:
+      <li><a href="#" onclick="trig(this)">{{items.name | remove:'["' | remove:'"]'}}</a>:
         <div style="display: none;">
           <ul>
             {% for item in items.items %}
@@ -32,6 +69,9 @@ layout: default
 </div>
 
 <script>
+  const result_div = document.getElementById('search_result');
+  const input_block = document.getElementById('search_input');
+
   function trig(ele) {
     var div = ele.parentElement.children[1];
 
@@ -41,4 +81,42 @@ layout: default
       div.style.display = 'block';
     }
   }
+
+  function on_input(event, obj) {
+    result_div.style.display = 'block';
+    var titles = document.getElementById('titles').innerText.replace(/\r|\n|\t|\s\s\s*/ig, '').split('\\');
+    var urls = document.getElementById('urls').innerText.replace(/\r|\n|\t|\s\s\s*/ig, '').split('\\');
+    var result = '';
+    if ('' != event.target.value) {
+        for (var i = 0; i < titles.length; i++) {
+          if (titles[i].match(event.target.value)) {
+            result = result+'<li style="border: 1px solid black;"><a href="'+urls[i]+'">'+titles[i]+'</a></li>';
+          }
+        }
+        result_div.innerHTML = result;
+    } else {
+      result_div.innerHTML = '';
+    }
+  }
+
+  function activate_input(event, obj) {
+    if ('none' == result_div.style.display) {
+      event.stopPropagation();
+      result_div.style.display = 'block';
+    } else {
+      on_input(event, obj);
+    }
+  }
+
+  document.addEventListener('click', function() {
+    result_div.style.display = 'none';
+  });
+
+  result_div.addEventListener('click', function(event) {
+    event.stopPropagation();
+  })
+
+  input_block.addEventListener('click', function(event) {
+    event.stopPropagation();
+  })
 </script>
