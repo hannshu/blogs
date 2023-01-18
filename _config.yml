@@ -1,7 +1,9 @@
-title: blog.hanshu.org
+title: Han's Blog Site
 author:
   name: han shu
   email: hanshu.npu@gmail.com
+
+tagline: Home Page
   
 site_name: blog.hanshu.org
 permalink: /:categories/:path/
