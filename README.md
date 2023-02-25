@@ -3,6 +3,7 @@
 - 自编码器AE  
 - 斯坦福cs224w学习笔记
 - TypeScript学习笔记
+- GNN学习笔记
 
 # about
 这个仓库可以通过 https://blog.hanshu.org 访问。  
