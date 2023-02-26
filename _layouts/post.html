@@ -14,19 +14,24 @@ layout: default
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: date_format }}
       </time>
-      {%- if page.modified_date -%}
         ~ 
+      {%- if page.modified_date -%}
         {%- assign mdate = page.modified_date | date_to_xmlschema -%}
+      {%- else -%}
+        {%- assign mdate = page.date | date_to_xmlschema -%}
+      {%- endif -%}
         <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
           {{ mdate | date: date_format }}
         </time>
-      {%- endif -%}
       {%- if page.author -%}
         • {% for author in page.author %}
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
             <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
             {%- if forloop.last == false %}, {% endif -%}
         {% endfor %}
+      {%- else -%}
+      • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Han Shu</span></span>
       {%- endif -%}</p>
   </header>
 
