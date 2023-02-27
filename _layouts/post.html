@@ -14,7 +14,7 @@ layout: default
           <span class="p-author h-card" itemprop="name"><b>By Han Shu</b></span></span><br>
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        Created data: {{ page.date | date: date_format }}
+        Created date: {{ page.date | date: date_format }}
       </time><br>
       {%- if page.modified_date -%}
         {%- assign mdate = page.modified_date | date_to_xmlschema -%}
