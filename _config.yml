@@ -14,15 +14,6 @@ svg_link: https://cdn.jsdelivr.net/gh/hannshu/imgs/icon/icon-blog.svg
 
 show_excerpts: false 
 
-comments:
-  gitalk: true
-  gitalk_clientID: '67c377de942eeae81e24'
-  gitalk_Secret: 'c462cfd4bf5b9adc7f190d866245686d14524104'
-  gitalk_repo: 'blogs'
-  gitalk_owner: 'hannshu'
-  gitalk_admin: 'hannshu'
-  distractionFreeMode: true
-
 minima:
   date_format: "%b %-d, %Y"
 
@@ -32,7 +23,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
-# markdown: kramdown
+markdown: kramdown
 
-# kramdown:
-#   math_engine: katex
+kramdown:
+  math_engine: katex

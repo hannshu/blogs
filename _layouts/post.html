@@ -37,23 +37,25 @@ layout: default
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 
-  <div id="gitalk-container"></div>
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-  <script src="/assets/md5.js"></script>
-  {% if site.comments.gitalk %}
+  <div id="disqus_thread"></div>
+  <script id="dsq-count-scr" src="https://blog-hanshu-org.disqus.com/count.js" async></script>
   <script>
-    const gitalk = new Gitalk({
-          clientID: '{{ site.comments.gitalk_clientID }}',
-          clientSecret: '{{ site.comments.gitalk_Secret }}',
-          repo: '{{ site.comments.gitalk_repo }}',
-          owner: '{{ site.comments.gitalk_owner }}',
-          admin: '{{ site.comments.gitalk_admin }}',
-          id: hex_md5(location.pathname),      // Ensure uniqueness and length less than 50{{ page.title }}
-          distractionFreeMode: false,
-        })
-
-    gitalk.render('gitalk-container')
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://blog-hanshu-org.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
   </script>
-  {% endif %}
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 </article>
