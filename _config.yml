@@ -19,6 +19,11 @@ minima:
 
 theme: minima
 
+collections:
+  cat:
+    output: true
+    permalink: /:path/
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag

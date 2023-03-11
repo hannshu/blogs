@@ -1,0 +1,114 @@
+---
+layout: default
+---
+
+<div class="home">  
+    <h2>Index page for catrgory: {{ page.title }}.</h2>
+    <div class="search_area">
+        search note: <input type="text" id="search_input" oninput="on_input(event, this)" onclick="activate_input(event, this)" placeholder="key words...">
+        <ul class="table">
+          <div id="search_result" style="position:relative;max-height:300px;overflow-y:auto;"></div>
+        </ul>
+      </div><br>
+
+    {% assign list = site.posts | group_by:"categories" %}
+    {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+
+    <!-- show posts name  -->
+    <div style="margin-top: 20px;">
+        <ul>
+        {% for posts in list %}
+        {% assign name = posts.name | remove:'["' | remove:'"]' %}
+        {% if name == page.title %}
+        <ul>
+            {% for item in posts.items %}
+            <li>
+                <h4>
+                <a class="post-link" href="{{ item.url | relative_url }}">
+                    {{ item.title | escape }}
+                </a>
+                </h4><span class="post-meta">{{ item.date | date: date_format }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+
+    {% for posts in list %}
+    {% assign name = posts.name | remove:'["' | remove:'"]' %}
+    {% if name == page.title %}
+
+      <!-- generate page title list -->
+        {% capture titles %}
+        {% for li in posts.items %}
+            {{ li.title | append: '\' }}
+        {% endfor %}
+        {% endcapture %}
+        <div id="titles" style="display: none;">{{titles}}</div>
+
+        {% capture urls %}
+        {% for li in posts.items %}
+            {{ li.url | relative_url | append: '\' }}
+        {% endfor %}
+        {% endcapture %}
+        <div id="urls" style="display: none;">{{urls}}</div>
+
+    {% endif %}
+    {% endfor %}
+
+  </div>
+
+  <script>
+    const result_div = document.getElementById('search_result');
+    const input_block = document.getElementById('search_input');
+  
+    function trig(ele) {
+      var div = ele.parentElement.children[1];
+  
+      if (div.style.display == 'block') {
+        div.style.display = 'none';
+      } else {
+        div.style.display = 'block';
+      }
+    }
+  
+    function on_input(event, obj) {
+      result_div.style.display = 'block';
+      var titles = document.getElementById('titles').innerText.replace(/\r|\n|\t|\s\s\s*/ig, '').split('\\');
+      var urls = document.getElementById('urls').innerText.replace(/\r|\n|\t|\s\s\s*/ig, '').split('\\');
+      var result = '';
+      if ('' != event.target.value) {
+          for (var i = 0; i < titles.length; i++) {
+            if (titles[i].toUpperCase().match(event.target.value.toUpperCase())) {
+              result = result+'<li style="border: 1px solid black;"><a href="'+urls[i]+'">'+titles[i]+'</a></li>';
+            }
+          }
+          result_div.innerHTML = result;
+      } else {
+        result_div.innerHTML = '';
+      }
+    }
+  
+    function activate_input(event, obj) {
+      if ('none' == result_div.style.display) {
+        event.stopPropagation();
+        result_div.style.display = 'block';
+      } else {
+        on_input(event, obj);
+      }
+    }
+  
+    document.addEventListener('click', function() {
+      result_div.style.display = 'none';
+    });
+  
+    result_div.addEventListener('click', function(event) {
+      event.stopPropagation();
+    })
+  
+    input_block.addEventListener('click', function(event) {
+      event.stopPropagation();
+    })
+  </script>
